@@ -63,33 +63,39 @@ from utilities import generateFibonacci, getFactorial
 )
 def calculateResults(btncalculate_clicks, num_input, process_select):
     if btncalculate_clicks > 0:
-        num_input = int(num_input)
+
+        try:
+            float_val = float(num_input)
+        except (ValueError, TypeError):
+            return ["Words are not allowed."]
+
+        if not float_val.is_integer():
+            return ["Integers only."]
+
+        valid_num = int(float_val)
+
+        if valid_num < 0:
+            return ["No negative numbers."]
+
         process_select = int(process_select)
 
         if process_select == 1:
-            if num_input < 0:
-                output_val = str("Error! Number must be nonnegative.")
-            else:
-                factorial_value = getFactorial(num_input)
-                output_val = ("The factorial is "+ str(factorial_value) + ".")
+            factorial_value = getFactorial(valid_num)
+            output_val = ("The factorial is "+ str(factorial_value) + ".")
 
         elif process_select == 2:
-            if num_input < 0:
-                output_val = str("Error! Number must be nonnegative.")
-            else:
-                fib_sequence = generateFibonacci(num_input)
+                fib_sequence = generateFibonacci(valid_num)
                 fib_sequence_str = [str(i) for i in fib_sequence]
-                output_seq= ", ".join(fib_sequence_str)
-                output_val= ("We get the sequence "+ output_seq + ".")
+                output_seq = ", ".join(fib_sequence_str)
+                output_val = ("We get the sequence "+ output_seq + ".")
 
-            
         else:
             raise PreventUpdate
 
+        return [output_val]
+
     else:
         raise PreventUpdate
-    
-    return [output_val]
 
 if __name__ == '__main__':
     webbrowser.open('http://127.0.0.1:8050', autoraise=True)
