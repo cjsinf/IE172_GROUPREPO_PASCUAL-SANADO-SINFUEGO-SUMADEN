@@ -68,18 +68,20 @@ def calculateResults(btncalculate_clicks, num_input, process_select):
 
         if process_select == 1:
             if num_input < 0:
-                output_val = str("Error: Number must be nonnegative")
+                output_val = str("Error! Number must be nonnegative.")
             else:
                 factorial_value = getFactorial(num_input)
-                output_val = str(factorial_value)
+                output_val = ("The factorial is "+ str(factorial_value) + ".")
 
         elif process_select == 2:
             if num_input < 0:
-                output_val = str("Error: Number must be nonnegative")
+                output_val = str("Error! Number must be nonnegative.")
             else:
                 fib_sequence = generateFibonacci(num_input)
                 fib_sequence_str = [str(i) for i in fib_sequence]
-                output_val = ", ".join(fib_sequence_str)
+                output_seq= ", ".join(fib_sequence_str)
+                output_val= ("We get the sequence "+ output_seq + ".")
+
             
         else:
             raise PreventUpdate
