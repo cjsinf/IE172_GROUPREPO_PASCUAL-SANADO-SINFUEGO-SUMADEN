@@ -63,7 +63,6 @@ from utilities import generateFibonacci, getFactorial
 )
 def calculateResults(btncalculate_clicks, num_input, process_select):
     if btncalculate_clicks > 0:
-
         try:
             if num_input is None or str(num_input).strip() == "" or process_select is None:
                 raise Exception("Missing inputs trigger catchall")
