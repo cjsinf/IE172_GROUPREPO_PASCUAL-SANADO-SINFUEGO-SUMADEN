@@ -65,34 +65,41 @@ def calculateResults(btncalculate_clicks, num_input, process_select):
     if btncalculate_clicks > 0:
 
         try:
-            float_val = float(num_input)
-        except (ValueError, TypeError):
-            return ["Words are not allowed."]
+            if num_input is None or str(num_input).strip() == "" or process_select is None:
+                raise Exception("Missing inputs trigger catchall")
 
-        if not float_val.is_integer():
-            return ["Integers only."]
+            try:
+                float_val = float(num_input)
+            except (ValueError, TypeError):
+                return [html.Span("Words are not allowed.", style={"color": "red"})]
 
-        valid_num = int(float_val)
+            if not float_val.is_integer():
+                return [html.Span("Integers only.", style={"color": "red"})]
 
-        if valid_num < 0:
-            return ["No negative numbers."]
+            valid_num = int(float_val)
 
-        process_select = int(process_select)
+            if valid_num < 0:
+                return [html.Span("No negative numbers.", style={"color": "red"})]
 
-        if process_select == 1:
-            factorial_value = getFactorial(valid_num)
-            output_val = ("The factorial is "+ str(factorial_value) + ".")
+            process_select = int(process_select)
 
-        elif process_select == 2:
-                fib_sequence = generateFibonacci(valid_num)
-                fib_sequence_str = [str(i) for i in fib_sequence]
-                output_seq = ", ".join(fib_sequence_str)
-                output_val = ("We get the sequence "+ output_seq + ".")
+            if process_select == 1:
+                factorial_value = getFactorial(valid_num)
+                output_val = ("The factorial is "+ str(factorial_value) + ".")
 
-        else:
-            raise PreventUpdate
+            elif process_select == 2:
+                    fib_sequence = generateFibonacci(valid_num)
+                    fib_sequence_str = [str(i) for i in fib_sequence]
+                    output_seq = ", ".join(fib_sequence_str)
+                    output_val = ("We get the sequence "+ output_seq + ".")
 
-        return [output_val]
+            else:
+                raise PreventUpdate
+
+            return [html.Span(output_val, style={"color": "black"})]
+
+        except Exception:
+            return [html.Span("Unknown input, try again!", style={"color": "red"})]
 
     else:
         raise PreventUpdate
