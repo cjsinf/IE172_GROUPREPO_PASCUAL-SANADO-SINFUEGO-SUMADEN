@@ -21,7 +21,6 @@ app.layout = html.Div(
                             [
                                 dbc.Label("Number"),
                                 dbc.Input(placeholder="Place a number here", type="text", id='num_input'),
-                                dbc.FormText("Negative numbers are not allowed."),
                             ]
                         ), 
                         html.Div(
@@ -57,7 +56,8 @@ from utilities import generateFibonacci, getFactorial
 
 @app.callback(
     [
-        Output('output_area', 'children')
+        Output('output_area', 'children'),
+        Output('output_area', 'style')
     ],
     [
         Input('btn_calculate', 'n_clicks')
@@ -67,41 +67,44 @@ from utilities import generateFibonacci, getFactorial
         State('process_select', 'value')
     ]
 )
+
 def calculateResults(btncalculate_clicks, num_input, process_select):
     if btncalculate_clicks > 0:
-
         try:
-            float_val = float(num_input)
-        except (ValueError, TypeError):
-            return ["Words are not allowed."]
+            try:
+                float_val = float(num_input)
+            except (ValueError, TypeError):
+                return "Words are not allowed.", {'color': 'red'}
 
-        if not float_val.is_integer():
-            return ["Integers only."]
+            if not float_val.is_integer():
+                return "Integers only.", {'color': 'red'}
 
-        valid_num = int(float_val)
+            valid_num = int(float_val)
 
-        if valid_num < 0:
-            return ["No negative numbers."]
+            if valid_num < 0:
+                return "No negative numbers.", {'color': 'red'}
 
-        process_select = int(process_select)
+            process_select = int(process_select)
 
-        if process_select == 1:
-            factorial_value = getFactorial(valid_num)
-            output_val = ("The factorial is "+ str(factorial_value) + ".")
+            if process_select == 1:
+                factorial_value = getFactorial(valid_num)
+                output_val = "The factorial is " + str(factorial_value) + "."
 
-        elif process_select == 2:
+            elif process_select == 2:
                 fib_sequence = generateFibonacci(valid_num)
                 fib_sequence_str = [str(i) for i in fib_sequence]
                 output_seq = ", ".join(fib_sequence_str)
-                output_val = ("We get the sequence "+ output_seq + ".")
+                output_val = "We get the sequence " + output_seq + "."
 
-        else:
-            raise PreventUpdate
+            else:
+                return "Unknown input, try again!", {'color': 'red'}
 
-        return [output_val]
+            return output_val, {'color': 'black'}
 
-    else:
-        raise PreventUpdate
+        except Exception:
+            return "Unknown input, try again!", {'color': 'red'}
+
+    raise PreventUpdate
 
 if __name__ == '__main__':
     webbrowser.open('http://127.0.0.1:8050', autoraise=True)
