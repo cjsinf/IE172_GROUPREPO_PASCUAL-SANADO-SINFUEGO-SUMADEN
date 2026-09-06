@@ -44,7 +44,13 @@ app.layout = html.Div(
             ],
             style={"width": "18rem"},
         )
-    ]
+    ],
+    style={
+        "display": "flex",
+        "justifyContent": "center",
+        "alignItems": "center",
+        "height": "100vh",
+    },
 )
 
 from utilities import generateFibonacci, getFactorial
