@@ -1,0 +1,33 @@
+body {
+    background-color: #121212;
+}
+
+.app-card {
+    background-color: #181818;
+    border: 2px solid #1db954;
+}
+
+.app-header {
+    background-color: #1db954;
+    color: #121212;
+    font-size: 1.3rem;
+}
+
+.calc-btn {
+    background-color: #1db954;
+    color: #121212;
+    border: none;
+    font-size: 1rem;
+}
+
+.error-text {
+    color: #f15e6c;
+    font-style: italic;
+    font-size: 1.05rem;
+}
+
+.result-text {
+    color: #ffffff;
+    font-style: italic;
+    font-size: 1.05rem;
+}
