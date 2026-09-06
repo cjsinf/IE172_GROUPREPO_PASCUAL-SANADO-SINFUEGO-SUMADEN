@@ -1,33 +1,29 @@
-body {
-    background-color: #121212;
-}
-
 .app-card {
-    background-color: #181818;
-    border: 2px solid #1db954;
+    border: 4px double #166534;
+    background-color: #f0fdf4;
 }
 
 .app-header {
-    background-color: #1db954;
-    color: #121212;
+    background-color: #166534;
+    color: #ffffff;
     font-size: 1.3rem;
 }
 
 .calc-btn {
-    background-color: #1db954;
-    color: #121212;
-    border: none;
+    background-color: #166534;
+    color: #ffffff;
+    border: 2px solid #14532d;
     font-size: 1rem;
 }
 
 .error-text {
-    color: #f15e6c;
+    color: #b91c1c;
     font-style: italic;
     font-size: 1.05rem;
 }
 
 .result-text {
-    color: #ffffff;
+    color: #5c3a21;
     font-style: italic;
     font-size: 1.05rem;
 }
